@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+        #main{
+            display: none;
+          }
+          #newGame, #creditBtn, #backBtn , #FirstCampaign , #SecondCampaign , 
+          #ThirdCampaign, #FourthCampaign, #InvasionCampaign , #ProtectLandCampaign{
+            text-align: center;
+            vertical-align: middle;
+            border: 8px solid goldenrod;
+            border-radius: 7px;
+            background-color: gold;
+            color: rgb(71, 54, 48);
+            font-size: 32px;
+            font-weight: bold;
+            font-family: "Squares Bold";
+            width: 8em;
+            margin: 5px auto;
+          }
+          #credits{
+            margin: auto;
+            color: rgb(0, 0, 0);
+            font-size: 1em;
+            font-family: "Squares Bold";
+            display: none;
+            background-color: inherit;
+          }
+          #backBtn{
+            display: none;
+          }
+          body{
+            font-family: 'Squares Bold';
+          }
+    </style>
+    <script type="text/javascript" src="Scripts/Vector.js"></script>
+    <script type="text/javascript" src="Scripts/Particle.js"></script>
+    <script type="text/javascript" src="Scripts/serbianInvasion.js"></script>
+    <script type="text/javascript" src="Scripts/turkishScenario.js"></script>
+    <script type="text/javascript" src="Scripts/romaniaScenario.js"></script>
+    <script type="text/javascript" src="Scripts/greekScenario.js"></script>
+    <meta charset = "utf-8">
+    <style type = "text/css">
+    		html , body {
+			margin: 0px;
+		}
+		canvas {
+			display: block;
+		}
+    </style>
+</head>
+<body>
+    <div id="newGame" onclick="runGame()" onmouseover="this.style.backgroundColor = 'goldenrod'" onmouseout="this.style.backgroundColor = 'gold'">New Game</div>
+    <div id="FirstCampaign" onmouseover="this.style.backgroundColor = 'goldenrod'" onmouseout="this.style.backgroundColor = 'gold'" onclick="firstGame()">Bulgarian- serbian War (1885)</div>
+    <div id="SecondCampaign" onmouseover="this.style.backgroundColor = 'goldenrod'" onmouseout="this.style.backgroundColor = 'gold'" onclick="secondGame()">Battle of Lozengrad (1912) </div>
+    <div id="ThirdCampaign" onmouseover="this.style.backgroundColor = 'goldenrod'" onmouseout="this.style.backgroundColor = 'gold'" onclick="thirdGame()">Battle of Dobrich(1916)</div>
+    <div id="FourthCampaign" onmouseover="this.style.backgroundColor = 'goldenrod'" onmouseout="this.style.backgroundColor = 'gold'" onclick="fourthGame()">Incident at Petrich(1925)</div>
+    <div id="InvasionCampaign" onmouseover="this.style.backgroundColor = 'goldenrod'" onmouseout="this.style.backgroundColor = 'gold'" onclick="InvasionGame()">Invasion Campaign</div>
+    <div id="ProtectLandCampaign" onmouseover="this.style.backgroundColor = 'goldenrod'" onmouseout="this.style.backgroundColor = 'gold'" onclick="ProtectLandGame()">Protect your Land Campaign</div>
+    <div id="creditBtn" onmouseover="this.style.backgroundColor = 'goldenrod'" onmouseout="this.style.backgroundColor = 'gold'" onclick="showCredits()">Credits</div>
+    <div id="credits"><strong>TANK GAME PROJECT</strong> <strong><br>
+        #Enemy 1 - Suicide enemy who has the ability to charge at full speed towards you (SE)<br>
+        #Enemy 2 - Alpha Sniper enemy - his bullets have the capacity to get the most damage : -10dmg/hit (ASE)<br>
+        #Enemy 3 - Machine gun enemy - he shoots bullets pretty fast but if your bullets interact with his , they will disappear (MGE)<br>
+        #Enemy 4 - Sigma Sniper enemy - he shoots very fast bullets but is rarely engaged in the battle (SSE)<br>
+        #Enemy 5 - Grenades Throwing Enemy - He shoots slow bullets at you but if the bullets are close enough , they are exploding and taking a lot damage (GTE)<br>
+        #Enemy 6 - Big Bombs Bombard - He is very slow but is leaving mines after him (BBB)<br></strong>
+    </div>
+    <div id="backBtn" onmouseover="this.style.backgroundColor = 'goldenrod'" onmouseout="this.style.backgroundColor = 'gold'" onclick="goBack()">Back</div>
+    <div id="main">
+    <div id="score"></div>
+    <canvas id = "canvas"></canvas>
+    <script>
+    document.getElementById("FirstCampaign").style.display = "none";
+    document.getElementById("SecondCampaign").style.display = "none";
+    document.getElementById("ThirdCampaign").style.display = "none";
+    document.getElementById("FourthCampaign").style.display = "none";
+    document.getElementById("InvasionCampaign").style.display = "none";
+    document.getElementById("ProtectLandCampaign").style.display = "none";
+    var runGame = function(){
+        document.getElementById("newGame").style.display = "none";
+        document.getElementById("credits").style.display = "none";       
+        document.getElementById("main").style.display = "block";
+        document.getElementById("creditBtn").style.display = "none";
+        document.getElementById("FirstCampaign").style.display = "block";
+        document.getElementById("SecondCampaign").style.display = "block";
+        document.getElementById("ThirdCampaign").style.display = "block";
+        document.getElementById("FourthCampaign").style.display = "block";
+        document.getElementById("InvasionCampaign").style.display = "block";
+        document.getElementById("ProtectLandCampaign").style.display = "block";
+    };
+    var showCredits = function(){
+       document.getElementById("creditBtn").style.display = "none";
+       document.getElementById("newGame").style.display = "none";
+       document.getElementById("credits").style.display = "block";
+       document.getElementById("backBtn").style.display = "block";
+       document.getElementById("FirstCampaign").style.display = "none";
+     };
+    var goBack = function(){
+      document.getElementById("backBtn").style.display = "none";
+      document.getElementById("credits").style.display = "none";
+      document.getElementById("newGame").style.display = "block";
+      document.getElementById("creditBtn").style.display = "block";
+    };
+    var firstGame = function(){
+        document.getElementById("FirstCampaign").style.display = "none";
+        document.getElementById("SecondCampaign").style.display = "none";
+        document.getElementById("ThirdCampaign").style.display = "none";
+        document.getElementById("FourthCampaign").style.display = "none";
+        document.getElementById("InvasionCampaign").style.display = "none";
+        document.getElementById("ProtectLandCampaign").style.display = "none";
+        serbianScenario();
+    };
+    var secondGame = function(){
+        document.getElementById("FirstCampaign").style.display = "none";
+        document.getElementById("SecondCampaign").style.display = "none";
+        document.getElementById("ThirdCampaign").style.display = "none";
+        document.getElementById("FourthCampaign").style.display = "none";
+        document.getElementById("InvasionCampaign").style.display = "none";
+        document.getElementById("ProtectLandCampaign").style.display = "none";
+        turkishScenario();
+    }
+    var thirdGame = function(){
+        document.getElementById("FirstCampaign").style.display = "none";
+        document.getElementById("SecondCampaign").style.display = "none";
+        document.getElementById("ThirdCampaign").style.display = "none";
+        document.getElementById("FourthCampaign").style.display = "none";
+        document.getElementById("InvasionCampaign").style.display = "none";
+        document.getElementById("ProtectLandCampaign").style.display = "none";
+        romaniaScenario();
+    }
+    var fourthGame = function(){
+        document.getElementById("FirstCampaign").style.display = "none";
+        document.getElementById("SecondCampaign").style.display = "none";
+        document.getElementById("ThirdCampaign").style.display = "none";
+        document.getElementById("FourthCampaign").style.display = "none";
+        document.getElementById("InvasionCampaign").style.display = "none";
+        document.getElementById("ProtectLandCampaign").style.display = "none";
+        greekScenario();
+    }
+      </script>
+</body>
+</html>
