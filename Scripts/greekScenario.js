@@ -1280,7 +1280,7 @@ function greekScenario() {
         })
   
         frames++;
-        //SpawnSuicideEnemiesFunction();
+        SpawnSuicideEnemiesFunction();
         FirstAlphaSniperEnemyFunction();
         SecondAlphaSniperEnemyFunction();
         ThirdAlphaSniperEnemyFunction();
