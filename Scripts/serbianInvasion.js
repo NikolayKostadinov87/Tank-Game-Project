@@ -74,6 +74,15 @@ function serbianScenario() {
     ThirdEnemyTankShot.src = "GameOver/EnemyTankShot.mp3";
     FourthEnemyTankShot.src = "GameOver/EnemyTankShot.mp3";
     FifthEnemyTankShot.src = "GameOver/EnemyTankShot.mp3";
+    //COUNTERS OF DAMAGE ON EMEMIES
+    var counterFirstEnemyDamage = 0,
+        counterSecondEnemyDamage = 0,
+        counterThirdEnemyDamage = 0,
+        counterFourthEnemyDamage = 0,
+        counterFifthEnemyDamage = 0;
+    //COUNTER OF ENEMIES HITTING THE TANK
+    var killedEnemiesCounter = 0;
+
     update();
 
     //-----MOUSE MOOVE EVENT
@@ -391,13 +400,16 @@ function serbianScenario() {
         context.rotate(angleOfTankRotation);
         context.beginPath();
         context.arc(0 , 0 , 10 , 0 , Math.PI * 2 , false);
+        context.fillStyle = 'white';
         context.moveTo(20, -15);
         context.lineTo(-20, -15);
         context.lineTo(-20, 15);
         context.lineTo(20, 15);
+        context.fill();
         context.lineTo(20, -15);
-        context.strokeStyle = 'red';
+        context.strokeStyle = '#0FFF50';
         context.stroke();
+        context.fill();
         
         context.restore();
 
@@ -597,7 +609,7 @@ function serbianScenario() {
                     bullets.splice(bullet_index , 1);
                 } , 0)
             }
-            //TANK'S BULLET COLLISION WITH FIRST ENEMY
+            //TANK'S BULLET COLLISION WITH ALPHA ENEMIES
             const distance_first_enemy = Math.hypot(FirstAlphaSniperEnemy.position.getX() - bullet.x , FirstAlphaSniperEnemy.position.getY() - bullet.y);
             const distance_second_enemy = Math.hypot(SecondAlphaSniperEnemy.position.getX() - bullet.x , SecondAlphaSniperEnemy.position.getY() - bullet.y);
             const distance_third_enemy = Math.hypot(ThirdAlphaSniperEnemy.position.getX() - bullet.x , ThirdAlphaSniperEnemy.position.getY() - bullet.y);
@@ -605,41 +617,68 @@ function serbianScenario() {
             const distance_fifth_enemy = Math.hypot(FifthAlphaSniperEnemy.position.getX() - bullet.x , FifthAlphaSniperEnemy.position.getY() - bullet.y);
             var rangleOfCollision = (RADIUS_ALPHA_SNIPER_ENEMY - Math.sqrt(2 * RADIUS_ALPHA_SNIPER_ENEMY ^ 2));
             if(distance_first_enemy - bullet.radius - rangleOfCollision < 1){
-                isDeadFirstEnemy = true;
-                if(FirstEnemyTankShot.ended) FirstEnemyTankShot.pause();
-                else FirstEnemyTankShot.play();
-                //followingEnemy.position.setX(150);
-                //followingEnemy.position.setY(100);
+                counterFirstEnemyDamage++;
+                if(counterFirstEnemyDamage === 15){
+                    isDeadFirstEnemy = true;
+                    if(FirstEnemyTankShot.ended) FirstEnemyTankShot.pause();
+                    else FirstEnemyTankShot.play();
+                    FirstAlphaSniperEnemy.position.setX(-150);
+                    FirstAlphaSniperEnemy.position.setY(-100);
+                    killedEnemiesCounter++;
+                }
             }
             if(distance_second_enemy - bullet.radius - rangleOfCollision < 1){
-                isDeadSecondEnemy = true;
-                if(SecondEnemyTankShot.ended) SecondEnemyTankShot.pause();
-                else SecondEnemyTankShot.play();
-                //followingEnemy.position.setX(150);
-                //followingEnemy.position.setY(100);
+                counterSecondEnemyDamage++;
+                if(counterSecondEnemyDamage === 15){
+                    isDeadSecondEnemy = true;
+                    if(SecondEnemyTankShot.ended) SecondEnemyTankShot.pause();
+                    else SecondEnemyTankShot.play();
+                    SecondAlphaSniperEnemy.position.setX(-150);
+                    SecondAlphaSniperEnemy.position.setY(-100);
+                    killedEnemiesCounter++;
+                }
             }
             if(distance_third_enemy - bullet.radius - rangleOfCollision < 1){
-                isDeadThirdEnemy = true;
-                if(ThirdEnemyTankShot.ended) ThirdEnemyTankShot.pause();
-                else ThirdEnemyTankShot.play();
-                //followingEnemy.position.setX(150);
-                //followingEnemy.position.setY(100);
+                counterThirdEnemyDamage++;
+                if(counterThirdEnemyDamage === 15){
+                    isDeadThirdEnemy = true;
+                    if(ThirdEnemyTankShot.ended) ThirdEnemyTankShot.pause();
+                    else ThirdEnemyTankShot.play();
+                    ThirdAlphaSniperEnemy.position.setX(-150);
+                    ThirdAlphaSniperEnemy.position.setY(-100);
+                    killedEnemiesCounter++;
+                }
             }
             if(distance_fourth_enemy - bullet.radius - rangleOfCollision < 1){
-                isDeadFourthEnemy = true;
-                if(FourthEnemyTankShot.ended) FourthEnemyTankShot.pause();
-                else FourthEnemyTankShot.play();
-                //followingEnemy.position.setX(150);
-                //followingEnemy.position.setY(100);
+                counterFourthEnemyDamage++;
+                if(counterFourthEnemyDamage === 15){
+                    isDeadFourthEnemy = true;
+                    if(FourthEnemyTankShot.ended) FourthEnemyTankShot.pause();
+                    else FourthEnemyTankShot.play();
+                    FourthAlphaSniperEnemy.position.setX(-150);
+                    FourthAlphaSniperEnemy.position.setY(-100);
+                    killedEnemiesCounter++;
+                }
             }
             if(distance_fifth_enemy - bullet.radius - rangleOfCollision < 1){
-                isDeadFifthEnemy = true;
-                if(FifthEnemyTankShot.ended) FifthEnemyTankShot.pause();
-                else FifthEnemyTankShot.play();
-                //followingEnemy.position.setX(150);
-                //followingEnemy.position.setY(100);
+                counterFifthEnemyDamage++;
+                if(counterFifthEnemyDamage === 15){
+                    isDeadFifthEnemy = true;
+                    if(FifthEnemyTankShot.ended) FifthEnemyTankShot.pause();
+                    else FifthEnemyTankShot.play();
+                    FifthAlphaSniperEnemy.position.setX(-150);
+                    FifthAlphaSniperEnemy.position.setY(-100);
+                    killedEnemiesCounter++;
+                }
             }
-
+            if(isDeadFirstEnemy == true && isDeadSecondEnemy == true && isDeadThirdEnemy == true &&
+               isDeadFourthEnemy == true && isDeadFifthEnemy == true) {
+                document.getElementById("endScreenId").style.display = "block";
+                document.getElementById("endScreenBtn").style.display = "block";
+                document.getElementById("backToMenuBtn").style.display = "block";
+                document.getElementById("endScreenId").innerHTML = "Victory! Enemies Killed : " + killedEnemiesCounter;
+                pause();
+            }
         })
 
         //DRAWING AND UPDATING ENEMY BULLETS
@@ -661,11 +700,17 @@ function serbianScenario() {
             const distance = Math.hypot(tank.position.getX() - enemyBullet.x , tank.position.getY() - enemyBullet.y);
             var rangleOfCollision = (25 - Math.sqrt(2 * 25^2));  
             if(distance - enemyBullet.radius - rangleOfCollision < 1){
+                document.getElementById("endScreenId").style.display = "block";
+                document.getElementById("endScreenBtn").style.display = "block";
+                document.getElementById("backToMenuBtn").style.display = "block";
                 gameOverSound.play();
-                paused();
+                tank.position.setX(-100);
+                tank.position.setY(-150);
+                document.getElementById("endScreenId").innerHTML = "Enemies Killed : " + killedEnemiesCounter;
+                pause();
             }
             //ENEMY BULLET COLLISION WITH TANK BULLET
-            bullets.forEach((bullet , bullet_index) => {
+            bullets.forEach((bullet) => {
                 const distance_between_enemy_tank_bullets = 
                 Math.hypot(enemyBullet.x - bullet.x , enemyBullet.y - bullet.y);
                 if(distance_between_enemy_tank_bullets - enemyBullet.radius - bullet.radius < 1){
@@ -682,8 +727,14 @@ function serbianScenario() {
             const distance = Math.hypot(tank.position.getX() - suicide_enemy.x , tank.position.getY() - suicide_enemy.y);
             var rangleOfCollision = (25 - Math.sqrt(2 * 25^2));  
             if(distance - suicide_enemy.radius - rangleOfCollision < 1){
+                document.getElementById("endScreenId").style.display = "block";
+                document.getElementById("endScreenBtn").style.display = "block";
+                document.getElementById("backToMenuBtn").style.display = "block";
                 gameOverSound.play();
-                paused();
+                tank.position.setX(-100);
+                tank.position.setY(-150);
+                document.getElementById("endScreenId").innerHTML = "Enemies Killed : " + killedEnemiesCounter;
+                pause();
             }
             if(suicide_enemy.x + suicide_enemy.radius < 0 || 
                 suicide_enemy.y + suicide_enemy.radius < 0 ||
@@ -715,8 +766,14 @@ function serbianScenario() {
             const distance = Math.hypot(tank.position.getX() - enemy.x , tank.position.getY() - enemy.y);
             var rangleOfCollision = (25 - Math.sqrt(2 * 25^2));  
             if(distance - enemy.radius - rangleOfCollision < 1){
+                document.getElementById("endScreenId").style.display = "block";
+                document.getElementById("endScreenBtn").style.display = "block";
+                document.getElementById("backToMenuBtn").style.display = "block";
                 gameOverSound.play();
-                paused();
+                tank.position.setX(-100);
+                tank.position.setY(-150);
+                document.getElementById("endScreenId").innerHTML = "Enemies Killed : " + killedEnemiesCounter;
+                pause();
             }
             if(enemy.x + enemy.radius < 0 || 
                 enemy.y + enemy.radius < 0 ||
@@ -747,6 +804,6 @@ function serbianScenario() {
         FourthAlphaSniperEnemyFunction();
         FifthAlphaSniperEnemyFunction();
         requestAnimationFrame(update);  
-
     }
 }
+
